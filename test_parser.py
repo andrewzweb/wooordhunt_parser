@@ -1,6 +1,6 @@
 import unittest 
 import pytest
-from parser import *
+from wooordhunt_parser import *
 
 
 class BaseSettingsTest(unittest.TestCase):
