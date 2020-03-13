@@ -32,21 +32,32 @@ class ParsePageTest(unittest.TestCase):
         self.assertEqual(self.parse.parse_title(), 'Fire')
     
     def test_parse_transcription(self):
-        self.assertEqual(self.parse.parse_transcription(), '|ˈfaɪər|')
+        transcription = self.parse.parse_transcription()
+        self.assertEqual(transcription, '|ˈfaɪər|')
 
     def test_parse_definition(self):
         result = 'огонь'
-        self.assertIn(result, self.parse.parse_definition_ru())
+        definition_ru = self.parse.parse_definition_ru()
+        self.assertIn(result, definition_ru)
     
     def test_parse_phrases(self):
         result = 'to blanket the fire with sand'
-        self.assertEqual(len(self.parse.parse_phrases()), 10)
-        self.assertIn(result, self.parse.parse_phrases()[1]['eng'])
+        phrases = self.parse.parse_phrases()
+        self.assertEqual(len(phrases), 10)
+        self.assertIn(result, phrases[1]['eng'])
 
     def test_example(self):
         result = 'The house is on fire!'
-        self.assertIn(result, self.parse.parse_example()[1]['example_eng'])
-        self.assertEqual(len(self.parse.parse_example()), 30)
+        example = self.parse.parse_example()
+        self.assertIn(result, example[1]['example_eng'])
+        self.assertEqual(len(example), 30)
+        
+    def test_phrasal_verbs(self):
+        result = 'fire away'
+        verbs = self.parse.parse_phrasal_verbs()
+        self.assertTrue(verbs)
+        self.assertEqual(len(verbs), 4)
+        self.assertIn(result, verbs[1]['phrasal_verbs'])
         
 
 if __name__ == "__main__":

@@ -75,4 +75,25 @@ class Parse():
         return examples_dict
 
 
-    
+    def parse_phrasal_verbs(self):
+        phrasal_verbs = self.page.find_all("div", class_="similar_words")[0]
+
+        phrasal_verbs_dict = {}
+        numb = 1
+        rez = phrasal_verbs.find_all('a')
+        for item in rez: 
+            if item.get_text(): 
+                phrasal_verbs_dict[numb]={
+                    'phrasal_verbs': item.get_text(),
+                    'translate_rus': str(item.next.next).split(' — ')[1:][0]
+                }
+                print(phrasal_verbs_dict[numb])
+                numb += 1
+                
+            else: 
+                pass
+
+        print(phrasal_verbs_dict)
+
+        return phrasal_verbs_dict
+
