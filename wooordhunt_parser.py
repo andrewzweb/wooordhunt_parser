@@ -51,7 +51,6 @@ class Parse():
         return word_phrases
 
 
-
     def parse_example(self):
         examples = self.page.find_all("div", class_="block")[2].get_text()
         
@@ -76,24 +75,20 @@ class Parse():
 
 
     def parse_phrasal_verbs(self):
-        phrasal_verbs = self.page.find_all("div", class_="similar_words")[0]
+        phrasal_verbs = self.page.find_all("div", class_="similar_words")[0].find_all('a')
 
         phrasal_verbs_dict = {}
         numb = 1
-        rez = phrasal_verbs.find_all('a')
-        for item in rez: 
+
+        for item in phrasal_verbs: 
             if item.get_text(): 
                 phrasal_verbs_dict[numb]={
                     'phrasal_verbs': item.get_text(),
                     'translate_rus': str(item.next.next).split(' — ')[1:][0]
                 }
-                print(phrasal_verbs_dict[numb])
                 numb += 1
-                
             else: 
                 pass
-
-        print(phrasal_verbs_dict)
 
         return phrasal_verbs_dict
 
