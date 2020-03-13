@@ -37,12 +37,16 @@ class ParsePageTest(unittest.TestCase):
     def test_parse_definition(self):
         result = 'огонь'
         self.assertIn(result, self.parse.parse_definition_ru())
-
     
     def test_parse_phrases(self):
         result = 'to blanket the fire with sand'
         self.assertEqual(len(self.parse.parse_phrases()), 10)
         self.assertIn(result, self.parse.parse_phrases()[1]['eng'])
+
+    def test_example(self):
+        result = 'The house is on fire!'
+        self.assertIn(result, self.parse.parse_example()[1]['example_eng'])
+        self.assertEqual(len(self.parse.parse_example()), 30)
         
 
 if __name__ == "__main__":

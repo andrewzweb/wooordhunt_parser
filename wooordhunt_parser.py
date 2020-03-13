@@ -52,18 +52,27 @@ class Parse():
 
 
 
-    def parse_phrases_example(self):
+    def parse_example(self):
+        examples = self.page.find_all("div", class_="block")[2].get_text()
+        
+        examples_dict = {}
+        numb = 1
+        for item in examples.split(' ☰  '):
+            if item.split('\u2002 '):
+                example = item.split('\u2002 ')
+                try: 
+                    examples_dict[numb] = {
+                        "example_eng" : example[0].strip(),
+                        "example_rus" : example[1].strip()
+                    }
+                    numb += 1
+                except: 
+                    pass
 
-        # cleaning data 
-        for item in phrases.split(' '):
-            print(item.split('\u2002—\u2002'))
+            else: 
+                print('error: ', item)
 
-        #print(phrases)
+        return examples_dict
 
-        examples = soup.find_all('div', class_='block')[2]
-        ru = examples.find_all('div', class_='ex_o')
-        print(ru)
+
     
-
-        print(phrases)
-        return phrases
