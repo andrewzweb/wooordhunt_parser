@@ -20,7 +20,8 @@ class GetPageTest(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
 
 class ParsePageTest(unittest.TestCase):
-    
+
+    word = 'fire'
     targetUrl = 'https://wooordhunt.ru/word/fire'
     response = get_page(targetUrl)
     parse = Parse(response)
@@ -47,10 +48,10 @@ class ParsePageTest(unittest.TestCase):
         self.assertIn(result, phrases[1]['eng'])
 
     def test_example(self):
-        result = 'The house is on fire!'
+        result = self.word
         example = self.parse.parse_example()
         self.assertIn(result, example[1]['example_eng'])
-        self.assertEqual(len(example), 30)
+
         
     def test_phrasal_verbs(self):
         result = 'fire away'
